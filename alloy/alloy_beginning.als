@@ -43,7 +43,7 @@ sig Forum{
 //Multiple tickets can be sent by farmers to the respective policy makers
 sig Ticket{
 	//a report compiled bya farmer 
-	farmers: some Farmer,
+	farmers: one Farmer,
 	//a report obtained bya PolicyMaker
 	pms: lone PolicyMaker
 }
@@ -55,7 +55,6 @@ pred sameTicketFarmerPm[pm: PolicyMaker ,far:Farmer,ti:Ticket] {
 fact "same ticket per pm and farmer"{
 	all pm:PolicyMaker, f:Farmer, ti:Ticket | sameTicketFarmerPm[pm,f,ti] implies f.farm = pm.areas.farms
 }
-
 
 //The report must be sent to a policy maker who is responsible for the area where the farmer has his/her farm
 pred sameReportFarmerPm[pm: PolicyMaker ,far:Farm,re:Report] {
@@ -115,9 +114,10 @@ pred show{
 	#Forum = 1
 	#Archive = 1
 	#Farmer = 3
+	#Ticket = 3
 }
 
-run show for 40
+run show for 30
 
 
 
